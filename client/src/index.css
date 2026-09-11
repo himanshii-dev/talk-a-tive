@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
+
+  /* Light Theme Palette */
+  --bg-app: #f8fafc;
+  --bg-sidebar: #ffffff;
+  --bg-card: #ffffff;
+  --bg-surface: #f1f5f9;
+  --bg-bubble-self: #4f46e5;
+  --text-bubble-self: #ffffff;
+  --bg-bubble-other: #f1f5f9;
+  --text-bubble-other: #0f172a;
+  --bg-input: #ffffff;
+  --border-subtle: #e2e8f0;
+  --border-accent: #c7d2fe;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --text-subtle: #94a3b8;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(226, 232, 240, 0.8);
+  --msg-spacing: 0.875rem;
+  --avatar-size: 2.75rem;
+}
+
+/* Dark Theme Palette (Default) */
+.dark {
+  --bg-app: #0b0f17;
+  --bg-sidebar: #0f172a;
+  --bg-card: #1e293b;
+  --bg-surface: #131d31;
+  --bg-bubble-self: #4f46e5;
+  --text-bubble-self: #ffffff;
+  --bg-bubble-other: #1e293b;
+  --text-bubble-other: #f8fafc;
+  --bg-input: #152238;
+  --border-subtle: #24344d;
+  --border-accent: #3730a3;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --glass-bg: rgba(15, 23, 42, 0.85);
+  --glass-border: rgba(36, 52, 77, 0.6);
+}
+
+/* AMOLED Theme (Near Pure Black) */
+.amoled {
+  --bg-app: #000000;
+  --bg-sidebar: #000000;
+  --bg-card: #09090b;
+  --bg-surface: #0a0a0a;
+  --bg-bubble-self: #4338ca;
+  --text-bubble-self: #ffffff;
+  --bg-bubble-other: #121212;
+  --text-bubble-other: #fafafa;
+  --bg-input: #0a0a0a;
+  --border-subtle: #1c1c1f;
+  --border-accent: #312e81;
+  --text-main: #fafafa;
+  --text-muted: #a1a1aa;
+  --text-subtle: #71717a;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --glass-bg: rgba(0, 0, 0, 0.92);
+  --glass-border: rgba(28, 28, 31, 0.8);
+}
+
+/* Focus Mode Adjustments */
+.focus-mode {
+  --border-subtle: rgba(255, 255, 255, 0.05);
+}
+
+/* Compact Chat Mode */
+.compact-mode {
+  --msg-spacing: 0.35rem;
+  --avatar-size: 2.1rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.45);
+}
+
+/* Smooth Focus Rings */
+button:focus-visible, input:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+/* Reduced Motion Respect */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "talk-a-tive-app",
+  "version": "1.0.0",
+  "description": "Talk-a-tive: Production-Quality Full-Stack Real-Time Chat Platform",
+  "scripts": {
+    "dev": "concurrently \"npm run server:dev\" \"npm run client:dev\"",
+    "server:dev": "npm run dev --prefix server",
+    "client:dev": "npm run dev --prefix client",
+    "install:all": "npm install && cd server && npm install && cd ../client && npm install",
+    "seed": "node server/src/utils/seed.js",
+    "test:e2e": "node server/src/utils/test-e2e.js",
+    "build": "cd client && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": ["chat", "react", "socketio", "express", "mongodb", "realtime", "messaging"],
+  "author": "",
+  "license": "MIT"
+}
