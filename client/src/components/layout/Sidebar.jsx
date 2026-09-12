@@ -40,9 +40,9 @@ export const Sidebar = ({
   };
 
   return (
-    <aside className="w-80 sm:w-88 md:w-80 lg:w-88 h-full flex flex-col border-r border-slate-800/80 bg-slate-950/60 backdrop-blur-xl z-20 flex-shrink-0 select-none">
+    <aside className="w-80 sm:w-88 md:w-80 lg:w-88 h-full flex flex-col border-r border-subtle bg-sidebar backdrop-blur-xl z-20 flex-shrink-0 select-none transition-colors duration-200">
       {/* Top Header */}
-      <div className="h-16 px-4 border-b border-slate-800/80 flex items-center justify-between">
+      <div className="h-16 px-4 border-b border-subtle flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-glow">
@@ -114,7 +114,7 @@ export const Sidebar = ({
       </div>
 
       {/* Bottom Profile & Settings Footer */}
-      <div className="p-3 border-t border-slate-800/80 bg-slate-950/40 relative">
+      <div className="p-3 border-t border-subtle bg-sidebar relative">
         <div className="flex items-center justify-between">
           <div
             className="flex items-center gap-2.5 cursor-pointer min-w-0 p-1 rounded-xl hover:bg-slate-900/80 transition-colors flex-1 mr-2"

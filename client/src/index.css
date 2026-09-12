@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+:root,
+.light,
+[data-theme="light"] {
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-display: 'Outfit', system-ui, -apple-system, sans-serif;
 
@@ -11,6 +13,7 @@
   --bg-sidebar: #ffffff;
   --bg-card: #ffffff;
   --bg-surface: #f1f5f9;
+  --bg-surface-hover: #e2e8f0;
   --bg-bubble-self: #4f46e5;
   --text-bubble-self: #ffffff;
   --bg-bubble-other: #f1f5f9;
@@ -23,18 +26,20 @@
   --text-subtle: #94a3b8;
   --accent: #4f46e5;
   --accent-hover: #4338ca;
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(226, 232, 240, 0.8);
+  --glass-bg: rgba(255, 255, 255, 0.92);
+  --glass-border: rgba(226, 232, 240, 0.9);
   --msg-spacing: 0.875rem;
   --avatar-size: 2.75rem;
 }
 
 /* Dark Theme Palette (Default) */
-.dark {
+.dark,
+[data-theme="dark"] {
   --bg-app: #0b0f17;
   --bg-sidebar: #0f172a;
   --bg-card: #1e293b;
   --bg-surface: #131d31;
+  --bg-surface-hover: #1e293b;
   --bg-bubble-self: #4f46e5;
   --text-bubble-self: #ffffff;
   --bg-bubble-other: #1e293b;
@@ -51,31 +56,52 @@
   --glass-border: rgba(36, 52, 77, 0.6);
 }
 
-/* AMOLED Theme (Near Pure Black) */
-.amoled {
+/* AMOLED Theme (True Pitch Black) */
+.amoled,
+[data-theme="amoled"] {
   --bg-app: #000000;
   --bg-sidebar: #000000;
   --bg-card: #09090b;
-  --bg-surface: #0a0a0a;
+  --bg-surface: #0a0a0c;
+  --bg-surface-hover: #141418;
   --bg-bubble-self: #4338ca;
   --text-bubble-self: #ffffff;
-  --bg-bubble-other: #121212;
+  --bg-bubble-other: #121214;
   --text-bubble-other: #fafafa;
-  --bg-input: #0a0a0a;
-  --border-subtle: #1c1c1f;
+  --bg-input: #08080a;
+  --border-subtle: #1c1c20;
   --border-accent: #312e81;
   --text-main: #fafafa;
   --text-muted: #a1a1aa;
   --text-subtle: #71717a;
   --accent: #6366f1;
   --accent-hover: #818cf8;
-  --glass-bg: rgba(0, 0, 0, 0.92);
-  --glass-border: rgba(28, 28, 31, 0.8);
+  --glass-bg: rgba(0, 0, 0, 0.95);
+  --glass-border: rgba(28, 28, 32, 0.8);
 }
 
-/* Focus Mode Adjustments */
-.focus-mode {
+/* Focus Mode Adjustments (Minimalist Zen) */
+.focus-mode,
+[data-theme="focus"] {
+  --bg-app: #070a10;
+  --bg-sidebar: #0c1017;
+  --bg-card: #121824;
+  --bg-surface: #0f1420;
+  --bg-surface-hover: #161d2d;
+  --bg-bubble-self: #3b4382;
+  --text-bubble-self: #f1f5f9;
+  --bg-bubble-other: #121824;
+  --text-bubble-other: #e2e8f0;
+  --bg-input: #0c1017;
   --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-accent: rgba(99, 102, 241, 0.2);
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --glass-bg: rgba(12, 16, 23, 0.92);
+  --glass-border: rgba(255, 255, 255, 0.05);
 }
 
 /* Compact Chat Mode */
@@ -89,11 +115,22 @@ body {
   background-color: var(--bg-app);
   color: var(--text-main);
   overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 h1, h2, h3, .font-display {
   font-family: var(--font-display);
 }
+
+/* Semantic Theme Classes */
+.bg-app { background-color: var(--bg-app); }
+.bg-sidebar { background-color: var(--bg-sidebar); }
+.bg-card { background-color: var(--bg-card); }
+.bg-surface { background-color: var(--bg-surface); }
+.border-subtle { border-color: var(--border-subtle); }
+.text-main { color: var(--text-main); }
+.text-muted { color: var(--text-muted); }
+.text-subtle { color: var(--text-subtle); }
 
 /* Glassmorphism Classes */
 .glass-panel {
@@ -136,4 +173,241 @@ button:focus-visible, input:focus-visible, textarea:focus-visible {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* ==========================================================================
+   THEME STYLES & OVERRIDES FOR LIGHT, AMOLED, FOCUS, & COMPACT MODES
+   ========================================================================== */
+
+/* ------------------ LIGHT MODE OVERRIDES ------------------ */
+html.light,
+html[data-theme="light"],
+html:not(.dark) {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+}
+
+html.light .bg-slate-950,
+html.light .bg-slate-950\/60,
+html.light .bg-slate-950\/40,
+html.light .bg-slate-950\/20,
+html:not(.dark) .bg-slate-950,
+html:not(.dark) .bg-slate-950\/60,
+html:not(.dark) .bg-slate-950\/40,
+html:not(.dark) .bg-slate-950\/20 {
+  background-color: var(--bg-app) !important;
+}
+
+html.light aside,
+html.light .sidebar-container,
+html:not(.dark) aside {
+  background-color: var(--bg-sidebar) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+html.light .bg-slate-900,
+html.light .bg-slate-900\/60,
+html.light .bg-slate-900\/80,
+html.light .bg-slate-900\/90,
+html.light .bg-slate-900\/95,
+html:not(.dark) .bg-slate-900,
+html:not(.dark) .bg-slate-900\/60,
+html:not(.dark) .bg-slate-900\/80,
+html:not(.dark) .bg-slate-900\/90,
+html:not(.dark) .bg-slate-900\/95 {
+  background-color: var(--bg-surface) !important;
+}
+
+html.light .border-slate-800,
+html.light .border-slate-800\/80,
+html.light .border-slate-700,
+html.light .border-slate-700\/60,
+html:not(.dark) .border-slate-800,
+html:not(.dark) .border-slate-800\/80,
+html:not(.dark) .border-slate-700,
+html:not(.dark) .border-slate-700\/60 {
+  border-color: var(--border-subtle) !important;
+}
+
+html.light .glass-panel,
+html:not(.dark) .glass-panel {
+  background: var(--glass-bg) !important;
+  border-color: var(--glass-border) !important;
+  color: var(--text-main) !important;
+}
+
+html.light .text-white:not([class*="bg-indigo"]):not([class*="bg-purple"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-brand"]):not([class*="from-"]):not([class*="to-"]),
+html.light .text-slate-100:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="from-"]),
+html.light .text-slate-200:not([class*="bg-indigo"]):not([class*="from-"]),
+html:not(.dark) .text-white:not([class*="bg-indigo"]):not([class*="bg-purple"]):not([class*="bg-rose"]):not([class*="bg-emerald"]):not([class*="bg-brand"]):not([class*="from-"]):not([class*="to-"]),
+html:not(.dark) .text-slate-100:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="from-"]),
+html:not(.dark) .text-slate-200:not([class*="bg-indigo"]):not([class*="from-"]) {
+  color: var(--text-main) !important;
+}
+
+html.light .text-slate-300:not([class*="bg-indigo"]),
+html:not(.dark) .text-slate-300:not([class*="bg-indigo"]) {
+  color: #334155 !important;
+}
+
+html.light .text-slate-400,
+html:not(.dark) .text-slate-400 {
+  color: var(--text-muted) !important;
+}
+
+html.light .text-slate-500,
+html:not(.dark) .text-slate-500 {
+  color: var(--text-subtle) !important;
+}
+
+html.light input:not([type="checkbox"]):not([type="radio"]),
+html.light textarea,
+html:not(.dark) input:not([type="checkbox"]):not([type="radio"]),
+html:not(.dark) textarea {
+  background-color: var(--bg-input) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+html.light input::placeholder,
+html.light textarea::placeholder,
+html:not(.dark) input::placeholder,
+html:not(.dark) textarea::placeholder {
+  color: var(--text-subtle) !important;
+}
+
+html.light .hover\:bg-slate-800:hover,
+html.light .hover\:bg-slate-900:hover,
+html.light .hover\:bg-slate-900\/80:hover,
+html.light .hover\:bg-slate-800\/50:hover,
+html:not(.dark) .hover\:bg-slate-800:hover,
+html:not(.dark) .hover\:bg-slate-900:hover,
+html:not(.dark) .hover\:bg-slate-900\/80:hover,
+html:not(.dark) .hover\:bg-slate-800\/50:hover {
+  background-color: var(--bg-surface-hover) !important;
+  color: var(--text-main) !important;
+}
+
+html.light .bg-slate-800\/90,
+html:not(.dark) .bg-slate-800\/90 {
+  background-color: var(--bg-bubble-other) !important;
+  color: var(--text-bubble-other) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+html.light .bg-slate-800:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]),
+html:not(.dark) .bg-slate-800:not([class*="bg-indigo"]):not([class*="bg-rose"]):not([class*="bg-emerald"]) {
+  background-color: var(--bg-surface) !important;
+  color: var(--text-main) !important;
+  border-color: var(--border-subtle) !important;
+}
+
+/* ------------------ AMOLED MODE OVERRIDES ------------------ */
+html.amoled,
+html.amoled body,
+html[data-theme="amoled"] {
+  background-color: #000000 !important;
+}
+
+html.amoled .bg-slate-950,
+html.amoled .bg-slate-950\/60,
+html.amoled .bg-slate-950\/40,
+html.amoled .bg-slate-950\/20,
+html.amoled .bg-app,
+html.amoled aside,
+html.amoled .bg-sidebar {
+  background-color: #000000 !important;
+}
+
+html.amoled .bg-slate-900,
+html.amoled .bg-slate-900\/60,
+html.amoled .bg-slate-900\/80,
+html.amoled .bg-slate-900\/90,
+html.amoled .bg-slate-900\/95,
+html.amoled .bg-card,
+html.amoled .bg-surface {
+  background-color: #08080a !important;
+}
+
+html.amoled .border-slate-800,
+html.amoled .border-slate-800\/80,
+html.amoled .border-slate-700,
+html.amoled .border-slate-700\/60,
+html.amoled .border-subtle {
+  border-color: #1a1a1e !important;
+}
+
+html.amoled .bg-slate-800\/90 {
+  background-color: #121214 !important;
+  border-color: #27272a !important;
+}
+
+html.amoled .glass-panel {
+  background: rgba(5, 5, 8, 0.96) !important;
+  border-color: #1c1c20 !important;
+}
+
+html.amoled input:not([type="checkbox"]):not([type="radio"]),
+html.amoled textarea {
+  background-color: #050507 !important;
+  border-color: #222226 !important;
+}
+
+/* ------------------ FOCUS MODE OVERRIDES ------------------ */
+html.focus-mode,
+html.focus-mode body,
+html[data-theme="focus"] {
+  background-color: var(--bg-app) !important;
+}
+
+html.focus-mode .bg-slate-950,
+html.focus-mode .bg-slate-950\/60,
+html.focus-mode .bg-slate-950\/40,
+html.focus-mode .bg-slate-950\/20 {
+  background-color: var(--bg-app) !important;
+}
+
+html.focus-mode aside {
+  background-color: var(--bg-sidebar) !important;
+}
+
+html.focus-mode .bg-slate-900,
+html.focus-mode .bg-slate-900\/60,
+html.focus-mode .bg-slate-900\/80,
+html.focus-mode .bg-slate-900\/90,
+html.focus-mode .bg-slate-900\/95 {
+  background-color: var(--bg-surface) !important;
+}
+
+html.focus-mode .border-slate-800,
+html.focus-mode .border-slate-800\/80,
+html.focus-mode .border-slate-700,
+html.focus-mode .border-slate-700\/60 {
+  border-color: var(--border-subtle) !important;
+}
+
+html.focus-mode .shadow-glow,
+html.focus-mode .shadow-glow-lg,
+html.focus-mode .shadow-2xl {
+  box-shadow: none !important;
+}
+
+/* ------------------ COMPACT MODE OVERRIDES ------------------ */
+html.compact-mode [id^="msg-"] {
+  margin-top: 1px !important;
+  margin-bottom: 1px !important;
+}
+
+html.compact-mode [id^="msg-"] .rounded-2xl {
+  padding-top: 0.35rem !important;
+  padding-bottom: 0.35rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 0.75rem !important;
+  font-size: 0.825rem !important;
+}
+
+html.compact-mode .chat-list-item,
+html.compact-mode aside .group.relative {
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.4rem !important;
 }

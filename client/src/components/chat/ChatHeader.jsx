@@ -46,7 +46,7 @@ export const ChatHeader = ({ onBackMobile }) => {
   }
 
   return (
-    <div className="h-16 px-4 border-b border-slate-800/80 bg-slate-950/40 backdrop-blur-md flex items-center justify-between z-10 select-none">
+    <div className="h-16 px-4 border-b border-subtle bg-sidebar/80 backdrop-blur-md flex items-center justify-between z-10 select-none transition-colors duration-200">
       <div className="flex items-center gap-3 min-w-0">
         {/* Mobile Back Button */}
         <button

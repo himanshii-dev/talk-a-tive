@@ -40,11 +40,11 @@ export const Modal = ({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ type: 'spring', damping: 25, stiffness: 350 }}
-            className={`relative w-full ${maxWidth} glass-panel bg-slate-900/95 border border-slate-700/60 rounded-2xl shadow-2xl z-10 overflow-hidden text-slate-100`}
+            className={`relative w-full ${maxWidth} glass-panel bg-card border border-subtle rounded-2xl shadow-2xl z-10 overflow-hidden text-main transition-colors duration-200`}
           >
             {/* Header */}
             {(title || onClose) && (
-              <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-slate-800">
+              <div className="flex items-center justify-between px-6 pt-5 pb-3 border-b border-subtle">
                 <div>
                   {title && (
                     <h3 className="text-lg font-semibold text-white font-display">

@@ -95,9 +95,9 @@ export const DetailsPanel = ({ onOpenAddMembers, onOpenGroupSettings }) => {
   };
 
   return (
-    <div className="w-80 h-full border-l border-slate-800/80 bg-slate-950/60 backdrop-blur-md flex flex-col z-20 overflow-hidden">
+    <div className="w-80 h-full border-l border-subtle bg-sidebar backdrop-blur-md flex flex-col z-20 overflow-hidden transition-colors duration-200">
       {/* Header */}
-      <div className="h-16 px-4 border-b border-slate-800/80 flex items-center justify-between">
+      <div className="h-16 px-4 border-b border-subtle flex items-center justify-between">
         <h3 className="text-sm font-semibold text-white font-display">
           {isGroup ? 'Group Information' : 'Contact Information'}
         </h3>

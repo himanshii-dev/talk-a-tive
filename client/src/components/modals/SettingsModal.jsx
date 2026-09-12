@@ -131,20 +131,23 @@ export const SettingsModal = ({ isOpen, onClose, onLogout }) => {
                         type="button"
                         onClick={() => {
                           setTheme(mode.id);
+                          if (user) {
+                            updateUser({ settings: { ...user.settings, theme: mode.id } });
+                          }
                           toast.success(`Switched to ${mode.label}`);
                         }}
                         className={`p-3 rounded-xl border text-left transition-all ${
                           isSelected
-                            ? 'bg-indigo-600/20 border-indigo-500 text-white shadow-sm'
+                            ? 'bg-indigo-600 border-indigo-500 text-white shadow-sm'
                             : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:bg-slate-900'
                         }`}
                       >
                         <div className="flex items-center justify-between mb-1">
-                          <Icon className={`w-4 h-4 ${isSelected ? 'text-brand-400' : 'text-slate-400'}`} />
-                          {isSelected && <Check className="w-3.5 h-3.5 text-brand-400" />}
+                          <Icon className={`w-4 h-4 ${isSelected ? 'text-white' : 'text-slate-400'}`} />
+                          {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
                         </div>
-                        <p className="text-xs font-semibold text-white">{mode.label}</p>
-                        <p className="text-[10px] text-slate-400 mt-0.5">{mode.desc}</p>
+                        <p className={`text-xs font-semibold ${isSelected ? 'text-white' : 'text-slate-200'}`}>{mode.label}</p>
+                        <p className={`text-[10px] mt-0.5 ${isSelected ? 'text-indigo-100' : 'text-slate-400'}`}>{mode.desc}</p>
                       </button>
                     );
                   })}

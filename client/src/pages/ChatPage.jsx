@@ -69,7 +69,7 @@ export const ChatPage = () => {
   }
 
   return (
-    <div className="h-screen w-screen overflow-hidden flex bg-slate-950 text-slate-100">
+    <div className="h-screen w-screen overflow-hidden flex bg-app text-main transition-colors duration-200">
       {/* 1. Left Column: Sidebar (Hidden on mobile when chat is open) */}
       <div
         className={`${

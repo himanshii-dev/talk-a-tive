@@ -67,7 +67,14 @@ export const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
       onClose();
       navigate('/chat');
     } catch (err) {
-      setError(err.response?.data?.message || err.message || 'Authentication failed');
+      const serverMsg = err.response?.data?.message;
+      if (serverMsg) {
+        setError(serverMsg);
+      } else if (err.message === 'Network Error' || !err.response) {
+        setError('Network Error: Cannot connect to server. Please check that your backend server is running on port 5000.');
+      } else {
+        setError(err.message || 'Authentication failed');
+      }
     } finally {
       setLoading(false);
     }
@@ -82,7 +89,14 @@ export const AuthModal = ({ isOpen, onClose, initialMode = 'login' }) => {
       onClose();
       navigate('/chat');
     } catch (err) {
-      setError(err.response?.data?.message || err.message || 'Demo login failed');
+      const serverMsg = err.response?.data?.message;
+      if (serverMsg) {
+        setError(serverMsg);
+      } else if (err.message === 'Network Error' || !err.response) {
+        setError('Network Error: Cannot connect to server. Please check that your backend server is running on port 5000.');
+      } else {
+        setError(err.message || 'Demo login failed');
+      }
     } finally {
       setLoading(false);
     }

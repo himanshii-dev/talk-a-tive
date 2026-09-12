@@ -37,20 +37,55 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 5000;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 
+// Normalize configured client origins
+const cleanClientUrl = CLIENT_URL.replace(/\/$/, '');
+const allowedOrigins = [
+  cleanClientUrl,
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://localhost:5174',
+  'http://127.0.0.1:5174',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+].filter(Boolean);
+
+export const isAllowedOrigin = (origin) => {
+  if (!origin) return true; // Mobile apps, Postman, curl, or same-origin
+  const normalizedOrigin = origin.replace(/\/$/, '');
+  if (allowedOrigins.includes(normalizedOrigin)) return true;
+
+  // In development, allow any localhost/127.0.0.1 port or private LAN IP
+  if (process.env.NODE_ENV !== 'production') {
+    if (/^https?:\/\/(localhost|127\.0\.0\.1)(:[0-9]+)?$/.test(origin)) {
+      return true;
+    }
+    if (/^https?:\/\/(192\.168\.\d+\.\d+|10\.\d+\.\d+\.\d+|172\.(1[6-9]|2\d|3[0-1])\.\d+\.\d+)(:[0-9]+)?$/.test(origin)) {
+      return true;
+    }
+  }
+  return false;
+};
+
 // Initialize Socket.IO
-const io = initializeSocket(server, CLIENT_URL);
+const io = initializeSocket(server, isAllowedOrigin);
 
 // Security & utility middleware
 app.use(
-  helmet({
-    crossOriginResourcePolicy: { policy: 'cross-origin' },
+  cors({
+    origin: (origin, callback) => {
+      if (isAllowedOrigin(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked for origin: ${origin}`));
+      }
+    },
+    credentials: true,
   })
 );
 
 app.use(
-  cors({
-    origin: [CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173'],
-    credentials: true,
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
   })
 );
 

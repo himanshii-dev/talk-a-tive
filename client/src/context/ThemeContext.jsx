@@ -32,7 +32,8 @@ export const ThemeProvider = ({ children }) => {
 
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove('dark', 'amoled', 'focus-mode', 'compact-mode');
+    root.classList.remove('dark', 'light', 'amoled', 'focus-mode', 'compact-mode');
+    root.setAttribute('data-theme', theme);
 
     if (theme === 'dark') {
       root.classList.add('dark');
@@ -40,6 +41,8 @@ export const ThemeProvider = ({ children }) => {
       root.classList.add('dark', 'amoled');
     } else if (theme === 'focus') {
       root.classList.add('dark', 'focus-mode');
+    } else if (theme === 'light') {
+      root.classList.add('light');
     }
 
     if (compactMode) {
